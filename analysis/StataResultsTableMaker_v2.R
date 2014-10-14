@@ -17,8 +17,7 @@ TableA<- data.frame
 AllFiles <- list.files()
 
 filesA <- AllFiles[grep('A', AllFiles)] # linear models
-filesB <- AllFiles[grep('B1', AllFiles)] # beta regression
-filesC <- AllFiles[grep('C', AllFiles)] # zero one inflated beta regression
+filesB <- AllFiles[grep('^B', AllFiles)] # beta regression
 
 # Combine into data frames
 CombineFiles <- function(file_list, start){
@@ -32,7 +31,6 @@ CombineFiles <- function(file_list, start){
 
 outputA <- CombineFiles(filesA, 'A1.dta')
 outputB <- CombineFiles(filesB, 'B1.dta')
-outputC <- CombineFiles(filesC, 'C1.dta')
 
 CleanUp <- data.frame(
         from = c('proportion:_cons', 'zeroinflate:_cons',
@@ -59,17 +57,8 @@ print(xtable(outputA, dcolumn = TRUE, booktabs = TRUE), size = 'scriptsize',
 #### Final clean up for the beta model #### 
 outputB <- FindReplace(outputB, Var = 'var', replaceData = CleanUp, exact = F)
 outputB <- outputB[1:11, ]
-names(outputB) <- c('', 'Keefer')
+names(outputB) <- c('', 'Keefer', 'LV pre-2001', 'LV Full')
 
 # Save as .tex table
 print(xtable(outputB, dcolumn = TRUE, booktabs = TRUE), size = 'scriptsize',
       include.rownames = FALSE, floating = FALSE, file = 'UpdateBeta.tex')
-
-#### Final clean up for the zero inflated beta model #### 
-outputC <- FindReplace(outputC, Var = 'var', replaceData = CleanUp, exact = F)
-outputC <- outputC[1:19, ]
-names(outputC) <- c('', 'LV pre-2001', 'LV Full')
-
-# Save as .tex table
-print(xtable(outputC, dcolumn = TRUE, booktabs = TRUE), size = 'scriptsize',
-      include.rownames = FALSE, floating = FALSE, file = 'UpdateZIB.tex')
