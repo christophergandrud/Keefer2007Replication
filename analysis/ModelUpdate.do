@@ -39,11 +39,15 @@ regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country
 ////// Beta and Zero Inflated Beta Models /////////////////////////////////////
 // Convert to proportions
 gen keefer_prop = Keefer2007_Fiscal / 100
-gen lv_prop = LV2012_Fiscal / 100
+gen lv_prop = (LV2012_Fiscal / 100)
+gen lv_prop_adj = (LV2012_Fiscal / 100) + 0.01
 
 // Keefer Table 4, Model 2 beta regression
 betafit keefer_prop, mu(ChecksResiduals33 DiEiec33 stabnsLag3) robust
 	regsave using "B1.dta", detail(all) replace table(KeeferBeta, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
+
+// Beta regresion Using Laeven and Valencia 2012 full sample with adjusted DV
+betafit lv_prop_adj, mu(ChecksResiduals33 DiEiec33 stabnsLag3) robust
 
 // Zero-inflated Beta regression Using Laeven and Valencia 2012 for crises before 2001
 zoib lv_prop ChecksResiduals33 DiEiec33 stabnsLag3 if year < 2001, zeroinflat(ChecksResiduals33 DiEiec33 stabnsLag3) robust
@@ -52,5 +56,6 @@ zoib lv_prop ChecksResiduals33 DiEiec33 stabnsLag3 if year < 2001, zeroinflat(Ch
 // Zero-inflated Beta regression Using Laeven and Valencia 2012 for all crises
 zoib lv_prop ChecksResiduals33 DiEiec33 stabnsLag3 if year, zeroinflat(ChecksResiduals33 DiEiec33 stabnsLag3) robust
 	regsave using "C2.dta", detail(all) replace table(LVZOIB_All, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
+
 
 
