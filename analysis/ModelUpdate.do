@@ -1,14 +1,14 @@
 ///////////////
 // Update Keefer (2007) with data from Laeven and Valencia (2012)
 // Christopher Gandrud
-// 14 October 2014
+// 17 October 2014
 // Using Stata 12.1
 ///////////////
 
 
 // Set up
 cd "/git_repositories/Keefer2007Replication/tables"
-use "/git_repositories/Keefer2007Replication/data/KeeferUpdate_Limited.dta", clear
+use "/git_repositories/Keefer2007Replication/data/KeeferExtended_Limited.dta", clear
 
 ///// Linear Models ////////////////////////////////////////////////////////////
 // Keefer Table 4, Model 2	
@@ -61,6 +61,3 @@ zoib lv_prop ChecksResiduals33 DiEiec33 stabnsLag3 if year < 2001, zeroinflat(Ch
 
 // Zero-inflated Beta regression Using Laeven and Valencia 2012 for all crises
 zoib lv_prop ChecksResiduals33 DiEiec33 stabnsLag3 if year, zeroinflat(ChecksResiduals33 DiEiec33 stabnsLag3) robust
-
-
-
