@@ -34,6 +34,15 @@ eLabels <- c('Low Comp.', 'High Comp.')
 Main$DiEiecL <- factor(Main$DiEiec, levels = c(0, 1), labels = eLabels)
 Main$DiEiecL <- relevel(Main$DiEiecL, ref = 'High Comp.')
 
+## Compare median costs for completed and ongoing crises
+# Ongoing crises
+ongoing <- subset(Main, HonohanCrisisOngoing == 1)
+median(ongoing$Diff, na.rm = TRUE) 
+
+# Completed crises
+complete <- subset(Main, HonohanCrisisOngoing == 0)
+median(complete$Diff, na.rm = TRUE)
+
 #### Plot Difference in Data Set Measurements ####
 PlotDiff <- ggplot(Main, aes(year, Diff, colour = HKOngoing, label = iso2c,
     shape = DiEiecL)) +
