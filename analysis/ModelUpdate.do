@@ -7,25 +7,26 @@
 
 
 // Set up
+// Change as needed.
 cd "/git_repositories/Keefer2007Replication/tables"
 use "/git_repositories/Keefer2007Replication/data/KeeferExtended_Limited.dta", clear
 
 ///// Linear Models ////////////////////////////////////////////////////////////
-// Keefer Table 4, Model 2	
+// Keefer Table 4, Model 2
 regress Keefer2007_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country)
 	regsave using "A1.dta", detail(all) replace table(KeeferOriginal, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
-	
+
 // Remove the Philippines
 regress Keefer2007_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country)
 
 // Using Honohan original
 regress Honohan2003_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country)
-	regsave using "A2.dta", detail(all) replace table(Honohan, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
+	regsave using "C1.dta", detail(all) replace table(Honohan, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
 
 // Using updated LV data for crises before 2001 only when Keefer also has data
 regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if Keefer2007_Fiscal != ., vce(cluster country)
 	regsave using "A3.dta", detail(all) replace table(LVPre2001Keef, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
-	
+
 // Using updated LV data for crises before 2001
 regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if year < 2001, vce(cluster country)
 	regsave using "A4.dta", detail(all) replace table(LVPre2001, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
@@ -33,7 +34,7 @@ regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if year < 2001, vce(
 // Using full Laeven and Valencia 2012 data
 regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country)
 	regsave using "A5.dta", detail(all) replace table(LVFull, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
-	
+
 
 
 ////// Beta and Zero Inflated Beta Models /////////////////////////////////////
@@ -49,7 +50,7 @@ betafit keefer_prop, mu(ChecksResiduals33 DiEiec33 stabnsLag3) robust
 // Beta regresion Using Laeven and Valencia 2012 pre-2001 with adjusted DV
 betafit lv_prop_adj if year < 2001, mu(ChecksResiduals33 DiEiec33 stabnsLag3) robust
 	regsave using "B2.dta", detail(all) replace table(LVpre2001, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
-	
+
 // Beta regresion Using Laeven and Valencia 2012 full sample with adjusted DV
 betafit lv_prop_adj, mu(ChecksResiduals33 DiEiec33 stabnsLag3) robust
 	regsave using "B3.dta", detail(all) replace table(LVFull, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
