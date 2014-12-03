@@ -39,13 +39,14 @@ CleanUp <- data.frame(
                 'proportion:', 'zeroinflate:',
                 'mu:_cons', 'ln_phi:_cons',
                  "^.*?_stderr", "_coef", "_cons", "Checks33", "DiEiec33",
-                 "stabnsLag3", "r2", "N_clust", "mu:", "N"),
+                 "stabnsLag3", "r2", "N_clust", "mu:", "N",
+                 "No. of Countrieso. of Clusters"),
         to = c('(Beta) constant', 'Pr(y=0) constant',
                 '(Beta) ', 'Pr(y=0) ',
                 'mu constant', 'ln phi constant', '', '', "constant",
                "Checks_Residual_33", "Electoral Comp._33",
                "Instability_AVG_LAG3", "R2", "No. of Clusters", '',
-               'No. of Countries')
+               'No. of Countries', "No. of Clusters")
     )
 
 #### Final clean up for the linear models ####
@@ -59,7 +60,7 @@ print(xtable(outputA, dcolumn = TRUE, booktabs = TRUE),
 
 #### Final clean up for the beta model ####
 outputB <- FindReplace(outputB, Var = 'var', replaceData = CleanUp, exact = F)
-outputB <- outputB[1:11, ]
+outputB <- outputB[c(1:11, 20), ]
 names(outputB) <- c('', 'Keefer', 'LV pre-2001', 'LV Full')
 
 # Save as .tex table
