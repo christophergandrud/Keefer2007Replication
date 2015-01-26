@@ -1,10 +1,10 @@
 ###########
-# Replication file for 'How they spend it'
+# Replication file for figures in 'When All is Said and Done'
 # Christopher Gandrud
-# 17 October 2014
+# 26 January 2015
 ###########
 
-# Set working directory
+# Set working directory. Change as needed.
 WD <- '/git_repositories/Keefer2007Replication/figures/'
 setwd(WD)
 
@@ -30,8 +30,11 @@ Main$HKOngoing[Main$HonohanCrisisOngoing == 0] <- 'Crisis Complete'
 Main$HKOngoing[Main$HonohanCrisisOngoing == 1] <- 'Crisis Ongoing'
 Main$HKOngoing[(Main$iso2c %in% 'PH' & Main$year %in% 1983)] <- 'Likely Coding Error'
 
+Main$DiEiecL <- 0
+Main$DiEiecL[Main$DiEiec33 >= 0.8] <- 1
+
 eLabels <- c('Low Comp.', 'High Comp.')
-Main$DiEiecL <- factor(Main$DiEiec, levels = c(0, 1), labels = eLabels)
+Main$DiEiecL <- factor(Main$DiEiecL, levels = c(0, 1), labels = eLabels)
 Main$DiEiecL <- relevel(Main$DiEiecL, ref = 'High Comp.')
 
 ## Compare median costs for completed and ongoing crises
