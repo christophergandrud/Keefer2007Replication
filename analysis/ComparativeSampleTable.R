@@ -83,5 +83,8 @@ names(sub) <- clean_names
 
 # Print table
 options(xtable.sanitize.text.function=identity)
-print.xtable(xtable(sub), include.rownames = F, size = 'tiny',
+print.xtable(xtable(sub, 
+             caption = 'Country-Crisis Samples for Each Regression Model'),
+             caption.placement = 'top',
+             include.rownames = F, size = 'tiny',
              file = paste0(TD, 'RegressionSamples.tex'))
