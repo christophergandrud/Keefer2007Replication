@@ -84,7 +84,9 @@ names(sub) <- clean_names
 # Print table
 options(xtable.sanitize.text.function=identity)
 print.xtable(xtable(sub, 
-             caption = 'Country-Crisis Samples for Each Regression Model'),
+             caption = 'Country-Crisis Samples Used in the Regression Models (darker colors = more electorally competitive using the Keefer measure)',
+             label = 'samplesTable'),
              caption.placement = 'top',
              include.rownames = F, size = 'tiny',
+             comment = F,
              file = paste0(TD, 'RegressionSamples.tex'))
