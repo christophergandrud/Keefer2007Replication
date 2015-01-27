@@ -9,7 +9,7 @@
 // Set up
 // Change as needed.
 cd "/git_repositories/Keefer2007Replication/tables"
-use "/git_repositories/Keefer2007Replication/data/KeeferExtended_Limited.dta", clear
+use "/git_repositories/Keefer2007Replication/data/KeeferExtended_RandP.dta", clear
 
 ///// Linear Models ////////////////////////////////////////////////////////////
 // Keefer Table 4, Model 2
@@ -35,7 +35,9 @@ regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if year < 2001, vce(
 regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country)
 	regsave using "A5.dta", detail(all) replace table(LVFull, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
 
-
+// Using Laeven and Valencia 2012 data, full sample, except for eurozone
+regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if eurozone == 0, vce(cluster country)
+	regsave using "A6.dta", detail(all) replace table(LVFull, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
 
 ////// Beta and Zero Inflated Beta Models /////////////////////////////////////
 // Convert to proportions

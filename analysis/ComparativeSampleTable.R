@@ -22,7 +22,7 @@ library(xtable)
 ## Data set created using:
 ## https://github.com/christophergandrud/CrisisDataIssues/blob/master/source/DataCreators/KeeferDataExtender.R
 
-Main <- read.dta(paste0(DD, 'KeeferExtended_Limited.dta'))
+Main <- read.dta(paste0(DD, 'KeeferExtended_RandP.dta'))
 
 #### Subset each sample ####
 # All independent variables not NA
@@ -31,11 +31,11 @@ sub <- Main %>% DropNA(c('ChecksResiduals33', 'DiEiec33', 'stabnsLag3'))
 sub <- sub %>% arrange(country, year)
 
 # Shorten country names
-sub$country <- gsub(', Province Of China', '', sub$country)
-sub$country <- gsub(', Bolivarian Republic Of', '', sub$country)
-sub$country <- gsub(', United Republic Of', '', sub$country)
-sub$country <- gsub(', Plurinational State Of', '', sub$country)
-sub$country <- gsub(', Republic Of', '', sub$country)
+sub$country <- gsub(', Province of China', '', sub$country)
+sub$country <- gsub(', Bolivarian Republic of', '', sub$country)
+sub$country <- gsub(', United Republic of', '', sub$country)
+sub$country <- gsub(', Plurinational State of', '', sub$country)
+sub$country <- gsub(', United Republic of', '', sub$country)
 sub$country <- gsub('Russian Federation', '', sub$country)
 sub$country <- gsub('Dominican Rep.', '', sub$country)
 

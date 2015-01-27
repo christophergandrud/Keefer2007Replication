@@ -2,7 +2,7 @@
 # Create .tex tables for Keefer (2007) update
 # Tables created with analysis/ModelUpdate.do in Stata 12.1
 # Christopher Gandrud
-# 21 November 2014
+# 27 January 2015
 #####################
 
 library(foreign)
@@ -75,3 +75,13 @@ names(outputC) <- c('', 'HK', 'Keefer')
 # Save as .tex table
 print(xtable(outputC, dcolumn = TRUE, booktabs = TRUE),
       include.rownames = FALSE, floating = FALSE, file = 'UpdateHK.tex')
+
+#### Eurozone out table ####
+eu <- read.dta('A6.dta')
+eu <- FindReplace(eu, Var = 'var', replaceData = CleanUp, exact = F)
+eu <- eu[1:11,]
+names(eu) <- c('', 'LV, no Eurozone')
+
+# Save as .tex table
+print(xtable(eu, dcolumn = TRUE, booktabs = TRUE),
+      include.rownames = FALSE, floating = FALSE, file = 'UpdateNoEurozone.tex')
