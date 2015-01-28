@@ -1,7 +1,7 @@
 ///////////////
 // Update Keefer (2007) with data from Laeven and Valencia (2012)
 // Christopher Gandrud
-// 3 December 2014
+// 28 January 2015
 // Using Stata 12.1
 ///////////////
 
