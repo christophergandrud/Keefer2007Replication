@@ -14,7 +14,7 @@ library(xtable)
 setwd('/git_repositories/Keefer2007Replication/tables/')
 
 # Get list of individual model tables
-TableA<- data.frame
+TableA <- data.frame
 AllFiles <- list.files()
 
 filesA <- AllFiles[grep('A', AllFiles)] # linear models
