@@ -1,7 +1,7 @@
 ################
 # Keefer data extender
 # Christopher Gandrud
-# 27 January 2015
+# 2 February 2015
 ###############
 
 library(DataCombine)
@@ -15,7 +15,6 @@ library(foreign)
 
 # Set working directory. Change as needed.
 setwd('/git_repositories/Keefer2007Replication/')
-
 
 # Fuction for keefer rolling 3 year averages
 rollmean3r <- function(x){
@@ -78,12 +77,31 @@ eu <- 'http://bit.ly/1yRvycq' %>%
         select(iso2c, year)
 eu$eurozone <- 1
 
+# High income by world bank definition (>= 12,746)
+gdp <- WDI(indicator = 'NY.GDP.PCAP.CD', start = 1960, end = 2013) %>%
+        select(iso2c, year, NY.GDP.PCAP.CD)
+
+gdp$high_income <- 0
+gdp$high_income[gdp$NY.GDP.PCAP.CD >= 12746] <- 1
+gdp <- gdp %>% select(-NY.GDP.PCAP.CD)
+
 ##### Combine data sets
 Comb <- dMerge(DpiData, Sub, Var = c('iso2c', 'year'), all.x = TRUE)
 Comb <- dMerge(Comb, Fiscal, Var = c('iso2c', 'year'), all.y = TRUE)
 Comb <- dMerge(Comb, eu, Var = c('iso2c', 'year'), all.x = TRUE)
+Comb <- dMerge(Comb, gdp, Var = c('iso2c', 'year'), all.x = TRUE)
 Comb$country <- countrycode(Comb$iso2c, origin = 'iso2c',
                             destination = 'country.name')
 Comb$eurozone[is.na(Comb$eurozone)] <- 0
 
+Comb <- Comb %>% arrange(country, year)
+
 write.dta(Comb, file = 'data/KeeferExtended_RandP.dta')
+
+
+#### Proportion high income ####
+hk <- DropNA(Comb, "Honohan2003.Fiscal")
+sum(hk$high_income) / nrow(hk)
+
+lv <- DropNA(Comb, "LV2012.Fiscal")
+sum(lv$high_income) / nrow(lv)

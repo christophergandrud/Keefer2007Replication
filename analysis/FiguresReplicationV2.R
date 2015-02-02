@@ -62,7 +62,6 @@ pdf('FiscalDifference.pdf', width = 10)
     PlotDiff
 dev.off()
 
-
 # -------------------------------------------------------------------- #
 #### Compare cost densities ####
 MainSub2000 <- subset(Main, year <= 2000)
