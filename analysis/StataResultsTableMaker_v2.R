@@ -2,7 +2,7 @@
 # Create .tex tables for Keefer (2007) update
 # Tables created with analysis/ModelUpdate.do in Stata 12.1
 # Christopher Gandrud
-# 27 January 2015
+# 6 February 2015
 #####################
 
 library(foreign)
@@ -14,11 +14,11 @@ library(xtable)
 setwd('/git_repositories/Keefer2007Replication/tables/')
 
 # Get list of individual model tables
-TableA <- data.frame
 AllFiles <- list.files()
 
 filesA <- AllFiles[grep('A', AllFiles)] # linear models
 filesB <- AllFiles[grep('^B', AllFiles)] # beta regression
+filesE <- AllFiles[grep('^E', AllFiles)] # excluding eurozone/eu countries 
 
 # Combine into data frames
 CombineFiles <- function(file_list, start){
@@ -33,6 +33,7 @@ CombineFiles <- function(file_list, start){
 outputA <- CombineFiles(filesA, start = 'A1.dta')
 outputB <- CombineFiles(filesB, start = 'B1.dta')
 outputC <- CombineFiles(c('C1.dta', 'A1.dta'), start = 'C1.dta')
+outputE <- CombineFiles(filesE, start = 'E1.dta')
 
 CleanUp <- data.frame(
         from = c('proportion:_cons', 'zeroinflate:_cons',
@@ -76,12 +77,11 @@ names(outputC) <- c('', 'HK', 'Keefer')
 print(xtable(outputC, dcolumn = TRUE, booktabs = TRUE),
       include.rownames = FALSE, floating = FALSE, file = 'UpdateHK.tex')
 
-#### Eurozone out table ####
-eu <- read.dta('A6.dta')
-eu <- FindReplace(eu, Var = 'var', replaceData = CleanUp, exact = F)
-eu <- eu[1:11,]
-names(eu) <- c('', 'LV, no Eurozone')
+#### Eurozone/EU out table ####
+outputE <- FindReplace(outputE, Var = 'var', replaceData = CleanUp, exact = F)
+outputE <- outputE[1:11,]
+names(outputE) <- c('', 'LV, no Eurozone', 'LV, no EU')
 
 # Save as .tex table
-print(xtable(eu, dcolumn = TRUE, booktabs = TRUE),
-      include.rownames = FALSE, floating = FALSE, file = 'UpdateNoEurozone.tex')
+print(xtable(outputE, dcolumn = TRUE, booktabs = TRUE),
+      include.rownames = FALSE, floating = FALSE, file = 'UpdateNoEurozoneEU.tex')

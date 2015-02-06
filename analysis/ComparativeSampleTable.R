@@ -1,7 +1,7 @@
 ###########
 # Replication file comparative sample table in 'When All is Said and Done'
 # Christopher Gandrud
-# 26 January 2015
+# 6 February 2015
 ###########
 
 # Set data directory
@@ -36,7 +36,7 @@ sub$country <- gsub(', Bolivarian Republic of', '', sub$country)
 sub$country <- gsub(', United Republic of', '', sub$country)
 sub$country <- gsub(', Plurinational State of', '', sub$country)
 sub$country <- gsub(', United Republic of', '', sub$country)
-sub$country <- gsub('Russian Federation', '', sub$country)
+sub$country <- gsub('Russian Federation', 'Russia', sub$country)
 sub$country <- gsub('Dominican Rep.', '', sub$country)
 
 # Crisis year
@@ -84,7 +84,7 @@ names(sub) <- clean_names
 # Print table
 options(xtable.sanitize.text.function=identity)
 print.xtable(xtable(sub, 
-             caption = 'Country-Crisis Samples Used in the Regression Models (darker colors = more electorally competitive using the Keefer measure)',
+             caption = 'Country-Crisis Samples Used in the Regression Models (darker shading = more electorally competitive using the Keefer measure)',
              label = 'samplesTable'),
              caption.placement = 'top',
              include.rownames = F, size = 'tiny',

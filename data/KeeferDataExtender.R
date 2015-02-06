@@ -1,7 +1,7 @@
 ################
 # Keefer data extender
 # Christopher Gandrud
-# 2 February 2015
+# 6 February 2015
 ###############
 
 library(DataCombine)
@@ -41,7 +41,6 @@ Fiscal$HonohanCrisisOngoing[is.na(Fiscal$HonohanCrisisOngoing)] <- 0
 
 Fiscal <- Fiscal %>% select(-Notes)
 
-# Fiscal <- dMerge(Fiscal, Ongoing, Var = c('iso2c', 'year'), all = TRUE)
 Fiscal <- subset(Fiscal, iso2c != '') # Drop Czechoslovakia
 
 #### Database of Political Institutions data 
@@ -93,6 +92,15 @@ Comb <- dMerge(Comb, gdp, Var = c('iso2c', 'year'), all.x = TRUE)
 Comb$country <- countrycode(Comb$iso2c, origin = 'iso2c',
                             destination = 'country.name')
 Comb$eurozone[is.na(Comb$eurozone)] <- 0
+
+# Create EU dummy
+Comb$eu <- Comb$eurozone
+Comb$eu[Comb$country == 'France' & Comb$year == 1994] <- 1
+Comb$eu[Comb$country == 'Denmark' & Comb$year == 2008] <- 1
+Comb$eu[Comb$country == 'Hungary' & Comb$year == 2008] <- 1
+Comb$eu[Comb$country == 'Sweden' & Comb$year == 2008] <- 1
+Comb$eu[Comb$country == 'United Kingdom' & Comb$year == 2007] <- 1
+
 
 Comb <- Comb %>% arrange(country, year)
 

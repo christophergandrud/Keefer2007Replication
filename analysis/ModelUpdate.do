@@ -1,10 +1,9 @@
 ///////////////
 // Update Keefer (2007) with data from Laeven and Valencia (2012)
 // Christopher Gandrud
-// 28 January 2015
+// 6 February 2015
 // Using Stata 12.1
 ///////////////
-
 
 // Set up
 // Change as needed.
@@ -37,7 +36,11 @@ regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3, vce(cluster country
 
 // Using Laeven and Valencia 2012 data, full sample, except for eurozone
 regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if eurozone == 0, vce(cluster country)
-	regsave using "A6.dta", detail(all) replace table(LVFull, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
+	regsave using "E1.dta", detail(all) replace table(LVFull_no_eurozone, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
+
+// Using Laeven and Valencia 2012 data, full sample, except for EU
+regress LV2012_Fiscal ChecksResiduals33 DiEiec33 stabnsLag3 if eu == 0, vce(cluster country)
+	regsave using "E2.dta", detail(all) replace table(LVFull_no_eu, order(regvars r2) format(%5.2f) paren(stderr) asterisk())
 
 ////// Beta and Zero Inflated Beta Models /////////////////////////////////////
 // Convert to proportions
