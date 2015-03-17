@@ -35,7 +35,7 @@ rollmean33 <- function(x){
 }
 
 #### Fiscal transfers data (both Laeven and Valencia (2012) and Keefer (2007))
-Fiscal <- read.csv('data/KefferFiscal.csv', stringsAsFactors = F)
+Fiscal <- read.csv('data/KeeferFiscal.csv', stringsAsFactors = F)
 Fiscal <- VarDrop(Fiscal, 'country')
 Fiscal$HonohanCrisisOngoing[is.na(Fiscal$HonohanCrisisOngoing)] <- 0
 
