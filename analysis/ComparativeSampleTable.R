@@ -1,7 +1,7 @@
 ###########
 # Replication file comparative sample table in 'When All is Said and Done'
 # Christopher Gandrud
-# 6 February 2015
+# 17 March 2015
 ###########
 
 # Set data directory
