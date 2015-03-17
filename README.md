@@ -34,7 +34,7 @@ observations' electoral competitiveness is created using
 ## Figures
 
 Figures in the paper are created with
-[analysis/FiguresReplication.R](analysis/FiguresReplication.R).
+[analysis/Figures.R](analysis/Figures.R).
 
 ## Data
 
