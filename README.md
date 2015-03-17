@@ -25,7 +25,7 @@ be `ssc` installed.
 
 Tables of these results shown in the paper's main text and supplementary
 materials can then be created by
-[analysis/StataResultsTableMaker.R](analysis/StataTableMaker.R) in R.
+[analysis/StataTableMaker.R](analysis/StataTableMaker.R) in R.
 
 Table 2 from the Supplementary Materials showing the comparative samples and
 observations' electoral competitiveness is created using
@@ -34,7 +34,7 @@ observations' electoral competitiveness is created using
 ## Figures
 
 Figures in the paper are created with
-[analysis/FiguresReplicationV2.R](analysis/FiguresReplicationV2.R).
+[analysis/FiguresReplication.R](analysis/FiguresReplication.R).
 
 ## Data
 
