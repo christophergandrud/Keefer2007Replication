@@ -11,7 +11,7 @@ library(DataCombine)
 library(xtable)
 
 # Set working directory. Change as needed.
-setwd('/git_repositories/Keefer2007Replication/tables/')
+setwd('~/git_repositories/Keefer2007Replication/tables/')
 
 # Get list of individual model tables
 AllFiles <- list.files()

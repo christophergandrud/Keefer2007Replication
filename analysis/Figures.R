@@ -1,15 +1,15 @@
 ###########
 # Replication file for figures in 'When All is Said and Done'
 # Christopher Gandrud
-# 26 January 2015
+# 17 February 2015
 ###########
 
 # Set working directory. Change as needed.
-WD <- '/git_repositories/Keefer2007Replication/figures/'
+WD <- '~/git_repositories/Keefer2007Replication/figures/'
 setwd(WD)
 
 # Set data directory
-DD <- '/git_repositories/Keefer2007Replication/data/'
+DD <- '~/git_repositories/Keefer2007Replication/data/'
 
 # Load packages
 library(foreign)
@@ -19,9 +19,9 @@ library(gridExtra)
 # -------------------------------------------------------------------- #
 #### Compare fiscal costs in LV vs. HK ####
 ## Data set created using:
-## https://github.com/christophergandrud/CrisisDataIssues/blob/master/source/DataCreators/KeeferDataExtender.R
+## data/KeeferDataExtender.R
 
-Main <- read.dta(paste0(DD, 'KeeferExtended_Limited.dta'))
+Main <- read.dta(paste0(DD, 'KeeferExtended_RandP.dta'))
 
 Main$Diff <- Main$LV2012_Fiscal - Main$Honohan2003_Fiscal
 cor.test(Main$LV2012_Fiscal, Main$Honohan2003_Fiscal)

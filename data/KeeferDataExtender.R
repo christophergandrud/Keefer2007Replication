@@ -1,7 +1,7 @@
 ################
 # Keefer data extender
 # Christopher Gandrud
-# 6 February 2015
+# 17 March 2015
 ###############
 
 library(DataCombine)
@@ -12,30 +12,30 @@ library(dplyr)
 library(repmis)
 library(WDI)
 library(foreign)
+library(repmis)
 
 # Set working directory. Change as needed.
-setwd('/git_repositories/Keefer2007Replication/')
+setwd('~/git_repositories/Keefer2007Replication/')
 
 # Fuction for keefer rolling 3 year averages
 rollmean3r <- function(x){
-  x <- shift(x, -2)
-  ma(x, 3, centre = FALSE)
+    x <- shift(x, -2)
+    ma(x, 3, centre = FALSE)
 }
 
 rollmean3f <- function(x){
-  x <- shift(x, 2)
-  ma(x, 3, centre = FALSE)
+    x <- shift(x, 2)
+    ma(x, 3, centre = FALSE)
 }
 
 rollmean33 <- function(x){
-  xR <- rollmean3r(x)
-  xF <- rollmean3f(x)
-  Comb <- (xR + xF)/2
+    xR <- rollmean3r(x)
+    xF <- rollmean3f(x)
+    Comb <- (xR + xF)/2
 }
 
 #### Fiscal transfers data (both Laeven and Valencia (2012) and Keefer (2007))
-Fiscal <- read.csv('data/KefferFiscal.csv', 
-                   stringsAsFactors = FALSE)
+Fiscal <- read.csv('data/KefferFiscal.csv', stringsAsFactors = F)
 Fiscal <- VarDrop(Fiscal, 'country')
 Fiscal$HonohanCrisisOngoing[is.na(Fiscal$HonohanCrisisOngoing)] <- 0
 
@@ -72,7 +72,7 @@ Sub <- Sub[, c('iso2c', 'year', 'ChecksResiduals33')]
 
 # Euro indicator
 eu <- 'http://bit.ly/1yRvycq' %>%
-        source_data() %>%
+        source_data(format = 'csv') %>%
         select(iso2c, year)
 eu$eurozone <- 1
 
@@ -107,7 +107,7 @@ Comb <- Comb %>% arrange(country, year)
 write.dta(Comb, file = 'data/KeeferExtended_RandP.dta')
 
 
-#### Proportion high income ####
+#### Find proportion of countries that are high income ####
 hk <- DropNA(Comb, "Honohan2003.Fiscal")
 sum(hk$high_income) / nrow(hk)
 

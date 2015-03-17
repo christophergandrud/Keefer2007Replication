@@ -10,16 +10,26 @@ The materials in this repository replicate and explore findings from
 using updated data on the fiscal costs of financial crises from
 [Laeven and Valencia (2012)](https://www.imf.org/external/pubs/cat/longres.aspx?sk=26015.0).
 
+## Set up
+
+The working directory for all of the source code files is set to
+`~/git_repositories/Keefer2007Replication`. Please change as needed.
+
 ## Model Estimation
 
-The [analysis/ModelUpdate.do](analysis/ModelUpdate.do) Stata 12.1 estimates
-the regression models.
+The [analysis/ModelUpdate.do](analysis/KeeferModelUpdate.do) uses Stata 12.1 to
+estimate the regression models. Note: he `regsave` and `betafit` commands must
+be `ssc` installed.
 
 ## Tables
 
 Tables of these results shown in the paper's main text and supplementary
 materials can then be created by
-[analysis/StataResultsTableMaker.R](analysis/StataResultsTableMaker.R) in R.
+[analysis/StataResultsTableMaker.R](analysis/StataTableMaker.R) in R.
+
+Table 2 from the Supplementary Materials showing the comparative samples and
+observations' electoral competitiveness is created using
+[analysis/ComparativeSampleTable.R](analysis/ComparativeSampleTable.R).
 
 ## Figures
 

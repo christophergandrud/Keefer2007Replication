@@ -5,10 +5,10 @@
 ###########
 
 # Set data directory
-DD <- '/git_repositories/Keefer2007Replication/data/'
+DD <- '~/git_repositories/Keefer2007Replication/data/'
 
 # Set table directory
-TD <- '/git_repositories/Keefer2007Replication/tables/'
+TD <- '~/git_repositories/Keefer2007Replication/tables/'
 
 # Load packages
 library(foreign)

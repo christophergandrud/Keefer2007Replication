@@ -1,14 +1,14 @@
 ///////////////
 // Update Keefer (2007) with data from Laeven and Valencia (2012)
 // Christopher Gandrud
-// 6 February 2015
+// 17 March 2015
 // Using Stata 12.1
 ///////////////
 
 // Set up
 // Change as needed.
-cd "/git_repositories/Keefer2007Replication/tables"
-use "/git_repositories/Keefer2007Replication/data/KeeferExtended_RandP.dta", clear
+cd "~/git_repositories/Keefer2007Replication/tables"
+use "~/git_repositories/Keefer2007Replication/data/KeeferExtended_RandP.dta", clear
 
 ///// Linear Models ////////////////////////////////////////////////////////////
 // Keefer Table 4, Model 2
