@@ -17,8 +17,8 @@ The working directory for all of the source code files is set to
 
 ## Model Estimation
 
-The [analysis/ModelUpdate.do](analysis/KeeferModelUpdate.do) uses Stata 12.1 to
-estimate the regression models. Note: he `regsave` and `betafit` commands must
+The Stata 12.1 do-file [analysis/ModelUpdate.do](analysis/KeeferModelUpdate.do)
+estimates the regression models. Note: he `regsave` and `betafit` commands must
 be `ssc` installed.
 
 ## Tables
