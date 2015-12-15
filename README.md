@@ -3,7 +3,7 @@ Replication Materials for When All is Said and Done: Updating ‘Elections, Spec
 
 Christopher Gandrud and Mark Hallerberg
 
-*Forthcoming in Research and Politics*
+*[Research and Politics](http://rap.sagepub.com/content/2/3/2053168015589335)*
 
 The materials in this repository replicate and explore findings from
 [Keefer (2007)](http://dx.doi.org/10.1017/S0020818307070208)
